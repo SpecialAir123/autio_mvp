@@ -93,7 +93,7 @@ function Home_1() {
           const rect = progressBar.getBoundingClientRect();
           const x = e.clientX - rect.left;
           // Constrain sliding to only the white segments area (approximately 200px to 1356px)
-          const clampedX = Math.max(200, Math.min(x, 1356));
+          const clampedX = Math.max(70, Math.min(x, 1450));
           setProgressPosition(clampedX);
         }
       }
