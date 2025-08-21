@@ -35,8 +35,9 @@ import TipsIconSvg from "./assets/home_3/tips_icon.svg";
 
 function Home_1() {
   const containerRef = useRef<HTMLDivElement>(null);
-  const [progressPosition, setProgressPosition] = useState(778); // Start at third segment within constrained range
+  const [progressPosition, setProgressPosition] = useState(70); // Start at the left end of the slide bar
   const [isDragging, setIsDragging] = useState(false);
+  const [selectedCard, setSelectedCard] = useState<string>('toolkit'); // Track which card is selected, default to toolkit
 
   useEffect(() => {
     const updateScale = () => {
@@ -222,27 +223,67 @@ function Home_1() {
               
               {/* Buttons arranged horizontally */}
               <div className="flex items-center gap-3">
-                <div className="px-4 py-1 bg-white rounded-[20px] outline outline-[1.53px] outline-[#214538] outline-offset-[-1.53px] flex items-center justify-center">
-                  <div className="text-Color-Dark-Secondary text-[14px] font-['Fieldstones'] font-normal break-words">Tool kit</div>
+                <div 
+                  className={`px-4 py-1 rounded-[20px] outline outline-[1.53px] outline-[#214538] outline-offset-[-1.53px] flex items-center justify-center cursor-pointer transition-all duration-200 active:scale-95 ${
+                    selectedCard === 'toolkit' 
+                      ? 'bg-[#214538] hover:bg-[#214538]' 
+                      : 'bg-white hover:bg-green-100'
+                  }`}
+                  onClick={() => setSelectedCard('toolkit')}
+                >
+                  <div className={`text-[14px] font-['Fieldstones'] font-normal break-words ${
+                    selectedCard === 'toolkit' ? 'text-white' : 'text-black'
+                  }`}>Tool kit</div>
                 </div>
                 
-                <div className="px-4 py-1 bg-white rounded-[20px] outline outline-[1.53px] outline-[#214538] outline-offset-[-1.53px] flex items-center justify-center">
-                  <div className="text-Color-Dark-Secondary text-[14px] font-['Fieldstones'] font-normal break-words">Life style based</div>
+                <div 
+                  className={`px-4 py-1 rounded-[20px] outline outline-[1.53px] outline-[#214538] outline-offset-[-1.53px] flex items-center justify-center cursor-pointer transition-all duration-200 active:scale-95 ${
+                    selectedCard === 'lifestyle' 
+                      ? 'bg-[#214538] hover:bg-[#214538]' 
+                      : 'bg-white hover:bg-green-100'
+                  }`}
+                  onClick={() => setSelectedCard('lifestyle')}
+                >
+                  <div className={`text-[14px] font-['Fieldstones'] font-normal break-words ${
+                    selectedCard === 'lifestyle' ? 'text-white' : 'text-black'
+                  }`}>Life style based</div>
                 </div>
                 
-                <div className="px-4 py-1 bg-white rounded-[20px] outline outline-[1.53px] outline-[#214538] outline-offset-[-1.53px] flex items-center justify-center">
-                  <div className="text-Color-Dark-Secondary text-[14px] font-['Fieldstones'] font-normal break-words">User Centered</div>
+                <div 
+                  className={`px-4 py-1 rounded-[20px] outline outline-[1.53px] outline-[#214538] outline-offset-[-1.53px] flex items-center justify-center cursor-pointer transition-all duration-200 active:scale-95 ${
+                    selectedCard === 'usercentered' 
+                      ? 'bg-[#214538] hover:bg-[#214538]' 
+                      : 'bg-white hover:bg-green-100'
+                  }`}
+                  onClick={() => setSelectedCard('usercentered')}
+                >
+                  <div className={`text-[14px] font-['Fieldstones'] font-normal break-words ${
+                    selectedCard === 'usercentered' ? 'text-white' : 'text-black'
+                  }`}>User Centered</div>
                 </div>
                 
-                <div className="px-4 py-1 bg-[#214538] rounded-[20px] flex items-center justify-center">
-                  <div className="text-white text-[14px] font-['Fieldstones'] font-normal break-words">AI Search Engine</div>
+                <div 
+                  className={`px-4 py-1 rounded-[20px] outline outline-[1.53px] outline-[#214538] outline-offset-[-1.53px] flex items-center justify-center cursor-pointer transition-all duration-200 active:scale-95 ${
+                    selectedCard === 'aisearch' 
+                      ? 'bg-[#214538] hover:bg-[#214538]' 
+                      : 'bg-white hover:bg-green-100'
+                  }`}
+                  onClick={() => setSelectedCard('aisearch')}
+                >
+                  <div className={`text-[14px] font-['Fieldstones'] font-normal break-words ${
+                    selectedCard === 'aisearch' ? 'text-white' : 'text-black'
+                  }`}>AI Search Engine</div>
                 </div>
               </div>
             </div>
             
             {/* Description text below */}
             <div className="text-Color-Dark-Primary text-[18px] font-['Fieldstones'] font-normal leading-[17.78px] break-words">
-              Hi, this is an AI-ebbed searching engine for you to get the best car fit your life-style. The tool itself will adjust base on your familiarity of vehicles and your preference seamlessly.
+              {selectedCard === 'toolkit' ? "Your search, your way. We give you more than just filters — this is your ultimate toolkit for finding your car. Browse with confidence using smart comparisons, side-by-side spec breakdowns, budget tools, and vibe-based search prompts" :
+               selectedCard === 'lifestyle' ? "We don't just show you listings — we show you how a car fits into your world. Weekend adventurer? Daily city warrior? Soccer parent with a caffeine addiction? We factor in your lifestyle, routines, and dreams to recommend cars that feel right." :
+               selectedCard === 'usercentered' ? "You're the driver here (even before the test drive). This site is built around you. The more you explore, the better we get at understanding what matters to you — comfort, storage, fuel economy, you name it. Every interaction shapes a smarter, smoother experience. It's like having a car concierge that speaks your language and never pushes the hard sell." :
+               selectedCard === 'aisearch' ? "Hi, this is an AI-ebbed searching engine for you to get the best car fit your life-style. The tool itself will adjust base on your familiarity of vehicles and your preference seamlessly." :
+               "Hi, this is an AI-ebbed searching engine for you to get the best car fit your life-style. The tool itself will adjust base on your familiarity of vehicles and your preference seamlessly."}
             </div>
           </div>
 
@@ -279,7 +320,10 @@ function Home_1() {
           </div>
 
           {/* Right Dark Green Circular Button with Vector 25.svg - Larger and aligned */}
-          <div className="absolute left-[1700px] top-[845px] w-16 h-16 bg-[#214538] rounded-full flex items-center justify-center z-30">
+          <div 
+            className="absolute left-[1700px] top-[845px] w-16 h-16 bg-[#214538] rounded-full flex items-center justify-center z-30 cursor-pointer hover:bg-[#1a5f3a] transition-all duration-200 active:scale-95"
+            onClick={() => window.location.href = '/home_2'}
+          >
             <img src={Vector25Svg} alt="Arrow icon" className="w-8 h-8" />
           </div>
 
