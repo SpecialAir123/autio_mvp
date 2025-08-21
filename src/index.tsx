@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import VectorSvg from "./assets/home_1/Vector.svg";
 import Vector25Svg from "./assets/home_1/Vector 25.svg";
-import Group59Svg from "./assets/home_1/Group 59.svg";
+
 import Group92Svg from "./assets/home_1/Group 92.svg";
 import UnionSvg from "./assets/home_1/Union.svg";
 import BgImageL from "./assets/home_1/bg_image_L.svg";
@@ -14,12 +14,12 @@ import BeachImage from "./assets/home_2/source/caleb-george-G7hmn5v3zU8-unsplash
 import JeepImage from "./assets/home_2/jeep.svg";
 import PalmTreesImage from "./assets/home_2/source/steven-pahel-645g50Mxy8s-unsplash.jpg";
 import BeachIcon from "./assets/home_2/beach, coast, resort, palm, sun, sea, 2, line, basicons 1.svg";
-import GearIcon from "./assets/home_2/Group 92.svg";
+
 import HotelIcon from "./assets/home_2/hotel 1.svg";
-import ArrowIcon from "./assets/home_2/Vector_25.svg";
+
 import DownArrowIcon from "./assets/home_2/Vector_25-1.svg";
 import CarIcon from "./assets/home_2/Union-1.svg";
-import SurfboardIcon from "./assets/home_2/Group 59.svg";
+
 import TreesIcon from "./assets/home_2/trees 1.svg";
 import RoundCircleArrow from "./assets/home_2/round_circle_arrow.svg";
 
