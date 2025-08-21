@@ -1,65 +1,112 @@
-# Autio MVP
+# Autio MVP Project
 
-A React-based car searching and lifestyle recommendation application with an AI-powered search engine.
-
-## Features
-
-- **Home_1**: Main car search interface with AI-powered recommendations
-- **Home_2**: Lifestyle-based car selection interface
-- Interactive slide bar for user preference adjustment
-- Responsive design with custom Fieldstones font
-- Modern UI components built with Tailwind CSS
-
-## Pages
-
-### Home_1
-- Header with search functionality
-- Hero text with lifestyle integration
-- "About This Tool" information section
-- Interactive progress bar for knowledge level selection
-- Background image with blur overlay
-
-### Home_2
-- Lifestyle-based car selection
-- Beach day, Jeep, and palm trees lifestyle cards
-- Interactive input area for car preferences
-- Right sidebar with lifestyle guidance
-
-## Technologies Used
-
-- React 18
-- TypeScript
-- Tailwind CSS
-- Custom Fieldstones font family
-- SVG assets for UI elements
-
-## Getting Started
-
-1. Clone the repository
-2. Install dependencies: `npm install`
-3. Start the development server: `npm start`
-4. Open [http://localhost:3000](http://localhost:3000) in your browser
+This project is organized as a workspace with separate frontend and backend directories.
 
 ## Project Structure
 
 ```
-src/
-├── assets/
-│   ├── home_1/          # Assets for Home_1 page
-│   ├── home_2/          # Assets for Home_2 page
-│   └── fonts/           # Custom font files
-├── components/           # UI components
-├── styles/              # Global styles
-└── index.tsx            # Main application entry point
+autio_mvp/
+├── frontend/          # React frontend application
+│   ├── src/          # Source code
+│   ├── public/       # Public assets
+│   ├── components/   # UI components
+│   ├── styles/       # CSS and styling
+│   ├── node_modules/ # Dependencies
+│   └── package.json  # Frontend dependencies
+├── backend/           # Python FastAPI backend
+│   ├── app/          # FastAPI application
+│   │   ├── api/      # API routes
+│   │   ├── core/     # Configuration
+│   │   ├── models/   # Database models
+│   │   └── schemas/  # Data validation
+│   ├── requirements.txt # Python dependencies
+│   └── run.py        # Backend startup script
+├── package.json       # Workspace configuration
+└── README.md         # This file
 ```
 
-## Development
+## Getting Started
 
-The application uses a simple routing system based on URL paths:
-- `/` or `/home_1` → Home_1 page
-- `/home_2` → Home_2 page
+### Frontend Development
+```bash
+cd frontend
+npm install
+npm start
+```
 
-## Font
+### Backend Development
+```bash
+cd backend
+python -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+pip install -r requirements.txt
+python run.py
+```
 
-The application uses the custom Fieldstones font family for consistent typography across all text elements.
+### From Root Directory
+```bash
+# Frontend
+npm run dev          # Start frontend
+npm run build        # Build frontend
+npm run test         # Test frontend
+
+# Backend
+npm run backend:setup    # Setup backend environment
+npm run backend:install  # Install backend dependencies
+npm run backend:dev      # Start backend server
+```
+
+## Development Workflow
+
+1. **Frontend Development**: Work in the `frontend/` directory
+2. **Backend Development**: Work in the `backend/` directory
+3. **Root Level**: Use workspace scripts for common operations
+
+## API Endpoints
+
+The backend provides the following API endpoints:
+
+### Users
+- `POST /api/users/` - Create new user
+- `GET /api/users/{user_id}` - Get user by ID
+- `PUT /api/users/{user_id}/preferences` - Update user preferences
+- `GET /api/users/{user_id}/preferences` - Get user preferences
+
+### Cars
+- `GET /api/cars/search` - Search cars with filters
+- `GET /api/cars/recommendations` - Get personalized recommendations
+
+## API Documentation
+
+Once the backend is running, visit:
+- **Swagger UI**: http://localhost:8000/docs
+- **ReDoc**: http://localhost:8000/redoc
+
+## Migration Notes
+
+- All frontend content has been moved to the `frontend/` directory
+- Dependencies are preserved in `frontend/node_modules/`
+- Project should work immediately after migration
+- No reinstallation of packages required
+- Backend is now fully integrated with FastAPI
+
+## Features
+
+- **Home_1**: Landing page with slide bar functionality
+- **Home_2**: Car search and lifestyle recommendations
+- **Home_3**: Budget, distance, and travel preferences with interactive slide bars
+- **Responsive Design**: Mobile-first approach with Tailwind CSS
+- **TypeScript**: Full type safety and modern development experience
+- **FastAPI Backend**: High-performance Python API with automatic documentation
+- **Database Integration**: SQLAlchemy ORM with user preferences storage
+
+## Technologies Used
+
+- **Frontend**: React 18, TypeScript, Tailwind CSS
+- **Backend**: Python FastAPI, SQLAlchemy, Pydantic
+- **UI Components**: Custom components with Radix UI primitives
+- **Styling**: Tailwind CSS with custom design system
+- **Build Tool**: Create React App with webpack
+- **Package Manager**: npm with workspace support
+- **Database**: SQLite (development), PostgreSQL ready (production)
 
