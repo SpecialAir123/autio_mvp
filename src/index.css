@@ -79,6 +79,31 @@ code {
   height: 100vh;
 }
 
+/* Custom Color Classes */
+.Color-Dark-Primary {
+  color: #1E1E1E;
+}
+
+.Color-Dark-Secondary {
+  color: #9C9C9C;
+}
+
+.Color-Light-Primary {
+  color: #FEFEFE;
+}
+
+.Color-Light-Secondary {
+  color: #F0F0F0;
+}
+
+.Color-Dark-Green {
+  background-color: #214538;
+}
+
+.Color-Light-Green {
+  background-color: #4ADE80;
+}
+
 /* Responsive scaling for the fixed 1920px layout */
 @media (max-width: 1920px), (max-height: 1080px) {
   #root > div {

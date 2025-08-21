@@ -23,6 +23,16 @@ import CarIcon from "./assets/home_2/Union-1.svg";
 import TreesIcon from "./assets/home_2/trees 1.svg";
 import RoundCircleArrow from "./assets/home_2/round_circle_arrow.svg";
 
+// Import assets for Home_3
+import UnionHome3Svg from "./assets/home_3/Union.svg";
+import TipsIconSvg from "./assets/home_3/tips_icon.svg";
+import CarImageSvg from "./assets/home_3/Car image.svg";
+import DistanceIconPng from "./assets/home_3/distance_icon.png";
+import BudgetIconSvg from "./assets/home_3/budget_icon.svg";
+import RectangleSvg from "./assets/home_3/rectangle.svg";
+import LocationIconSvg from "./assets/home_3/location_icon.svg";
+import ArrowButtonSvg from "./assets/home_3/arrow_button.svg";
+
 function Home_1() {
   const containerRef = useRef<HTMLDivElement>(null);
   const [progressPosition, setProgressPosition] = useState(778); // Start at third segment within constrained range
@@ -444,6 +454,142 @@ function Home_2() {
   );
 }
 
+function Home_3() {
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const updateScale = () => {
+      if (containerRef.current) {
+        const container = containerRef.current;
+        const viewportWidth = window.innerWidth;
+        const viewportHeight = window.innerHeight;
+        
+        // Calculate scale to ensure full width is visible
+        const scaleX = (viewportWidth - 40) / 1920; // Leave 20px margin on each side
+        const scaleY = (viewportHeight - 40) / 1080; // Leave 20px margin on each side
+        const initialScale = Math.min(scaleX, scaleY, 1); // Don't scale up beyond 100%
+        
+        // Apply scale
+        container.style.transform = `scale(${initialScale})`;
+        container.style.transformOrigin = 'top left';
+        
+        // Position to ensure right side is visible
+        container.style.marginLeft = '20px';
+        container.style.marginTop = '20px';
+        
+        // Ensure the container is properly positioned
+        container.style.position = 'relative';
+        container.style.left = '0';
+        container.style.top = '0';
+      }
+    };
+
+    // Initial scale
+    updateScale();
+    
+    // Update scale on window resize
+    window.addEventListener('resize', updateScale);
+    
+    // Cleanup
+    return () => window.removeEventListener('resize', updateScale);
+  }, []);
+
+  return (
+    <div className="autio-page-container" ref={containerRef}>
+      <div className="w-[1920px] h-[1080px] relative bg-white rounded-3xl overflow-hidden">
+        {/* Header Items - Same structure as other pages */}
+        <div className="left-[60px] top-[20px] absolute flex items-center gap-4 z-20">
+          <img src={UnionHome3Svg} alt="Union icon" className="w-8 h-6" />
+          <div className="text-[#9C9C9C] text-[14px] font-['Fieldstones'] font-normal">
+            Hi, This is Vroom
+          </div>
+          <div className="bg-[#214538] rounded-[20px] px-6 py-2">
+            <div className="text-white text-[14px] font-['Fieldstones'] font-normal">
+              Prompt to search
+            </div>
+          </div>
+        </div>
+        
+        <div className="left-[851px] top-[39px] absolute justify-start text-neutral-400 text-xs font-normal font-['Fieldstones'] capitalize">-Ultimate Used car searching engine</div>
+        
+        <div className="w-12 h-12 p-2.5 left-[1737px] top-[914px] absolute bg-green-900 rounded-[60px] inline-flex flex-col justify-center items-center gap-2.5">
+          <img src={ArrowButtonSvg} alt="Arrow button" className="w-7 h-7" />
+        </div>
+        
+        <div className="left-[72px] top-[839px] absolute justify-start text-stone-900 text-2xl font-normal font-['Fieldstones'] uppercase leading-normal tracking-wide">Now PLEASE TELL US MORE about your dream car, YOUR LIFESTYLE OR ANYTHING IN YOUR MIND!</div>
+        <div className="w-[1739px] h-24 left-[72px] top-[888px] absolute rounded-[80px] border border-green-900"></div>
+        <div className="h-4 left-[166.43px] top-[928.55px] absolute inline-flex justify-start items-center gap-2">
+          <div className="justify-start text-Color-Dark-Primary text-sm font-normal font-['Fieldstones']">|</div>
+          <div className="justify-start text-Color-Dark-Secondary text-sm font-normal font-['Fieldstones']">I can take my surf boards, supplies and my friends to the beach for a beach day. Also use it for daily commute to work...</div>
+        </div>
+        <div className="w-9 h-5 left-[115px] top-[928.05px] absolute bg-green-900"></div>
+        
+        <img className="w-[960px] h-[1228px] left-[789px] top-[-436px] absolute rounded-3xl" src={CarImageSvg} alt="Car background" />
+        
+        <div className="left-[72px] top-[121px] absolute justify-start">
+          <span className="text-Color-Dark-Primary text-8xl font-normal font-['Fieldstones'] uppercase">Awesome, Last</span>
+          <span className="text-Color-Light-Primary text-8xl font-normal font-['Fieldstones'] uppercase"> few q</span>
+          <span className="text-white text-8xl font-normal font-['Fieldstones'] uppercase">uestions</span>
+        </div>
+        
+        {/* Budget Section */}
+        <div className="w-[624px] h-40 left-[72px] top-[251px] absolute bg-green-900"></div>
+        <div className="p-4 left-[628px] top-[251px] absolute bg-green-900 rounded-[60px] inline-flex justify-start items-center gap-2.5">
+          <img src={BudgetIconSvg} alt="Budget icon" className="w-8 h-8" />
+        </div>
+        <div className="left-[102px] top-[275px] absolute justify-start text-white text-2xl font-medium font-['Fieldstones'] uppercase">What is your Budget?</div>
+        
+        {/* Tips Section */}
+        <div className="w-[532px] h-[479px] left-[1190px] top-[277px] absolute bg-Color-Dark-Green rounded-[31px]"></div>
+        <div className="w-8 h-4 left-[334.76px] top-[345.57px] absolute text-center justify-center text-Color-Light-Primary text-xl font-normal font-['Fieldstones'] uppercase">-</div>
+        <div className="w-52 h-0 left-[102px] top-[362.57px] absolute outline outline-1 outline-offset-[-0.50px] outline-white"></div>
+        <div className="w-52 h-0 left-[392.60px] top-[362.57px] absolute outline outline-1 outline-offset-[-0.50px] outline-white"></div>
+        <div className="w-32 h-5 left-[127.01px] top-[335px] absolute text-center justify-start text-white text-xl font-normal font-['Fieldstones'] capitalize">30,000$</div>
+        <div className="w-32 h-5 left-[432px] top-[335px] absolute text-center justify-start text-white text-xl font-normal font-['Fieldstones'] capitalize">35,000$</div>
+        
+        <div className="left-[1249px] top-[330px] absolute text-right justify-start text-Color-Light-Primary text-3xl font-normal font-['Fieldstones'] uppercase">helpful tips</div>
+        <div className="w-5 h-10 left-[1518px] top-[332px] absolute bg-green-100"></div>
+        <div className="w-5 h-10 left-[1502px] top-[332px] absolute bg-green-300"></div>
+        <div className="w-5 h-10 left-[1486px] top-[332px] absolute bg-green-900 border border-Color-Light-Primary"></div>
+        
+        <div className="w-36 h-10 px-7 py-3.5 left-[1249px] top-[403px] absolute bg-Color-Light-Primary rounded-[33px] inline-flex justify-center items-center gap-2.5">
+          <div className="justify-start text-green-900 text-sm font-normal font-['Fieldstones'] uppercase">Set a Budget</div>
+        </div>
+        <div className="w-32 h-10 px-7 py-3.5 left-[1403px] top-[403px] absolute rounded-[33px] outline outline-1 outline-offset-[-1px] outline-white inline-flex justify-center items-center gap-2.5">
+          <div className="justify-start text-white text-xs font-normal font-['Fieldstones'] uppercase">Get History Report</div>
+        </div>
+        <div className="w-32 h-10 px-7 py-3.5 left-[1552px] top-[403px] absolute rounded-[33px] outline outline-1 outline-offset-[-1px] outline-white inline-flex justify-center items-center gap-2.5">
+          <div className="justify-start text-white text-xs font-normal font-['Fieldstones'] uppercase">inspection DETAILS</div>
+        </div>
+        
+        {/* Distance Section */}
+        <div className="w-[624px] h-40 left-[72px] top-[445px] absolute bg-green-900"></div>
+        <div className="w-16 h-16 px-5 py-4 left-[627px] top-[445px] absolute bg-green-900 rounded-[33.50px] inline-flex justify-start items-center gap-2.5">
+          <img src={LocationIconSvg} alt="Location icon" className="w-6 h-8" />
+        </div>
+        <div className="w-96 left-[102px] top-[474px] absolute justify-start text-white text-xl font-normal font-['Fieldstones'] uppercase">How far will you go for it?</div>
+        <div className="w-96 h-32 left-[1246px] top-[495px] absolute justify-start text-Color-Light-Primary text-sm font-normal font-['Fieldstones']">Determine Your Price Range: Include not just the purchase price, but also taxes, registration, insurance, and potential repairs. <br/>Consider Financing: If you're taking out a loan, get pre-approved to know how much you can afford and what your interest rate will be.</div>
+        <div className="left-[313.29px] top-[542px] absolute justify-center text-white text-sm font-normal font-['Fieldstones'] capitalize">Around</div>
+        <div className="w-48 h-0 left-[402.02px] top-[558.22px] absolute outline outline-1 outline-offset-[-0.50px] outline-white"></div>
+        <div className="w-44 h-0 left-[102px] top-[557px] absolute outline outline-1 outline-offset-[-0.50px] outline-white"></div>
+        <div className="w-24 left-[142.77px] top-[531px] absolute text-center justify-start text-white text-xl font-normal font-['Fieldstones'] capitalize">20 miles</div>
+        <div className="w-28 left-[443.02px] top-[533px] absolute text-center justify-start text-green-300 text-sm font-normal font-['Fieldstones'] capitalize">Zip Code</div>
+        
+        {/* Travel Section */}
+        <div className="w-[624px] h-40 left-[72px] top-[642px] absolute bg-green-900"></div>
+        <div className="w-16 h-16 p-4 left-[627px] top-[642px] absolute bg-green-900 rounded-[33.50px] inline-flex justify-start items-center gap-2.5">
+          <img src={DistanceIconPng} alt="Distance icon" className="w-3 h-3.5" />
+        </div>
+        <div className="w-64 left-[102px] top-[667px] absolute justify-start text-white text-xl font-normal font-['Fieldstones'] uppercase">How much do you travel per day?</div>
+        <div className="left-[540px] top-[739px] absolute text-center justify-start text-white text-xl font-normal font-['Fieldstones'] capitalize">20 Miles</div>
+        <div className="w-2.5 h-2.5 left-[274px] top-[748px] absolute bg-green-300 rounded-full"></div>
+        <div className="w-96 h-[5px] left-[102px] top-[751px] absolute bg-zinc-300 rounded-[47px]"></div>
+        <div className="w-44 h-[5px] left-[102px] top-[751px] absolute bg-Color-Light-Green rounded-[47px]"></div>
+      </div>
+    </div>
+  );
+}
+
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
@@ -454,6 +600,10 @@ function App() {
   
   if (path === '/home_2') {
     return <Home_2 />;
+  }
+  
+  if (path === '/home_3') {
+    return <Home_3 />;
   }
   
   // Default to Home_1
