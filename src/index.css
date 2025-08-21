@@ -1,0 +1,88 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Fieldstones Font Family */
+@font-face {
+  font-family: 'Fieldstones';
+  src: url('./assets/fonts/fieldstones/Fieldstones-Regular.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Fieldstones';
+  src: url('./assets/fonts/fieldstones/Fieldstones-Bold.otf') format('opentype');
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Fieldstones';
+  src: url('./assets/fonts/fieldstones/Fieldstones-Italic.otf') format('opentype');
+  font-weight: normal;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Fieldstones';
+  src: url('./assets/fonts/fieldstones/Fieldstones-BoldItalic.otf') format('opentype');
+  font-weight: bold;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Fieldstones';
+  src: url('./assets/fonts/fieldstones/Fieldstones-SemiBold.otf') format('opentype');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Fieldstones';
+  src: url('./assets/fonts/fieldstones/Fieldstones-ExtraBold.otf') format('opentype');
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Fieldstones';
+  src: url('./assets/fonts/fieldstones/Fieldstones-Thin.otf') format('opentype');
+  font-weight: 100;
+  font-style: normal;
+  font-display: swap;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #f0f0f0;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+#root {
+  width: 100vw;
+  height: 100vh;
+}
+
+/* Responsive scaling for the fixed 1920px layout */
+@media (max-width: 1920px), (max-height: 1080px) {
+  #root > div {
+    transform: scale(calc(min(100vw / 1920, 100vh / 1080)));
+    transform-origin: top left;
+  }
+}
