@@ -25,13 +25,13 @@ import RoundCircleArrow from "./assets/home_2/round_circle_arrow.svg";
 
 // Import assets for Home_3
 import UnionHome3Svg from "./assets/home_3/Union.svg";
-import TipsIconSvg from "./assets/home_3/tips_icon.svg";
 import CarImageSvg from "./assets/home_3/Car image.svg";
 import DistanceIconPng from "./assets/home_3/distance_icon.png";
 import BudgetIconSvg from "./assets/home_3/budget_icon.svg";
 import RectangleSvg from "./assets/home_3/rectangle.svg";
 import LocationIconSvg from "./assets/home_3/location_icon.svg";
 import ArrowButtonSvg from "./assets/home_3/arrow_button.svg";
+import TipsIconSvg from "./assets/home_3/tips_icon.svg";
 
 function Home_1() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -432,7 +432,7 @@ function Home_2() {
         </div>
         {/* Car Icon */}
         <div className="left-[115px] top-[928.05px] absolute">
-          <img src={CarIcon} alt="Car icon" className="w-6 h-4" />
+          <img src={CarIcon} alt="Car icon" className="w-9 h-6" />
         </div>
         
         {/* Right Sidebar Info Box */}
@@ -456,6 +456,8 @@ function Home_2() {
 
 function Home_3() {
   const containerRef = useRef<HTMLDivElement>(null);
+  const [travelPosition, setTravelPosition] = useState(274); // Start position for travel slider
+  const [isDraggingTravel, setIsDraggingTravel] = useState(false);
 
   useEffect(() => {
     const updateScale = () => {
@@ -494,48 +496,94 @@ function Home_3() {
     return () => window.removeEventListener('resize', updateScale);
   }, []);
 
+  // Travel slide bar functionality
+  const handleTravelMouseDown = (e: React.MouseEvent) => {
+    setIsDraggingTravel(true);
+    e.preventDefault();
+  };
+
+  const handleTravelTouchStart = (e: React.TouchEvent) => {
+    setIsDraggingTravel(true);
+  };
+
+  useEffect(() => {
+    const handleTravelMouseMove = (e: MouseEvent) => {
+      if (isDraggingTravel) {
+        // Use fixed positioning since we removed the data-travel-bar
+        const x = e.clientX - 102; // 102px is the left offset
+        // Constrain sliding to full bar length (0px to 384px)
+        const clampedX = Math.max(0, Math.min(x, 374));
+        setTravelPosition(102 + clampedX);
+      }
+    };
+
+    const handleTravelTouchMove = (e: TouchEvent) => {
+      if (isDraggingTravel) {
+        // Use fixed positioning since we removed the data-travel-bar
+        const x = e.touches[0].clientX - 102; // 102px is the left offset
+        // Constrain sliding to full bar length (0px to 384px)
+        const clampedX = Math.max(0, Math.min(x, 374));
+        setTravelPosition(102 + clampedX);
+      }
+    };
+
+    const handleTravelMouseUp = () => setIsDraggingTravel(false);
+    const handleTravelTouchEnd = () => setIsDraggingTravel(false);
+
+    if (isDraggingTravel) {
+      document.addEventListener('mousemove', handleTravelMouseMove);
+      document.addEventListener('mouseup', handleTravelMouseUp);
+      document.addEventListener('touchmove', handleTravelTouchMove);
+      document.addEventListener('touchend', handleTravelTouchEnd);
+    }
+
+    return () => {
+      document.removeEventListener('mousemove', handleTravelMouseMove);
+      document.removeEventListener('mouseup', handleTravelMouseUp);
+      document.removeEventListener('touchmove', handleTravelTouchMove);
+      document.removeEventListener('touchend', handleTravelTouchEnd);
+    };
+  }, [isDraggingTravel]);
+
   return (
     <div className="autio-page-container" ref={containerRef}>
       <div className="w-[1920px] h-[1080px] relative bg-white rounded-3xl overflow-hidden">
-        {/* Header Items - Same structure as other pages */}
-        <div className="left-[60px] top-[20px] absolute flex items-center gap-4 z-20">
-          <img src={UnionHome3Svg} alt="Union icon" className="w-8 h-6" />
-          <div className="text-[#9C9C9C] text-[14px] font-['Fieldstones'] font-normal">
-            Hi, This is Vroom
-          </div>
-          <div className="bg-[#214538] rounded-[20px] px-6 py-2">
-            <div className="text-white text-[14px] font-['Fieldstones'] font-normal">
-              Prompt to search
-            </div>
-          </div>
-        </div>
-        
-        <div className="left-[851px] top-[39px] absolute justify-start text-neutral-400 text-xs font-normal font-['Fieldstones'] capitalize">-Ultimate Used car searching engine</div>
         
         <div className="w-12 h-12 p-2.5 left-[1737px] top-[914px] absolute bg-green-900 rounded-[60px] inline-flex flex-col justify-center items-center gap-2.5">
           <img src={ArrowButtonSvg} alt="Arrow button" className="w-7 h-7" />
         </div>
+
+
+        {/* Right Arrow Button */}
+        <div className="w-12 h-12 p-2.5 left-[1737px] top-[914px] absolute bg-green-900 rounded-[60px] inline-flex flex-col justify-center items-center gap-2.5">
+          <img src={DownArrowIcon} alt="Arrow icon" className="w-6 h-6" />
+        </div>
         
         <div className="left-[72px] top-[839px] absolute justify-start text-stone-900 text-2xl font-normal font-['Fieldstones'] uppercase leading-normal tracking-wide">Now PLEASE TELL US MORE about your dream car, YOUR LIFESTYLE OR ANYTHING IN YOUR MIND!</div>
         <div className="w-[1739px] h-24 left-[72px] top-[888px] absolute rounded-[80px] border border-green-900"></div>
-        <div className="h-4 left-[166.43px] top-[928.55px] absolute inline-flex justify-start items-center gap-2">
+        <div className="left-[166.43px] top-[928.55px] absolute inline-flex justify-start items-center gap-2">
           <div className="justify-start text-Color-Dark-Primary text-sm font-normal font-['Fieldstones']">|</div>
-          <div className="justify-start text-Color-Dark-Secondary text-sm font-normal font-['Fieldstones']">I can take my surf boards, supplies and my friends to the beach for a beach day. Also use it for daily commute to work...</div>
+          <div className="text-Color-Dark-Secondary text-sm font-normal font-['Fieldstones']">I can take my surf boards, supplies and my friends to the beach for a beach day. Also use it for daily commute to work...</div>
         </div>
-        <div className="w-9 h-5 left-[115px] top-[928.05px] absolute bg-green-900"></div>
+        {/* Car Icon */}
+        <div className="left-[115px] top-[928.05px] absolute">
+          <img src={CarIcon} alt="Car icon" className="w-9 h-6" />
+        </div>
+
+        <img className="w-[960px] h-[1228px] left-[789px] top-[-200px] absolute rounded-3xl" src={CarImageSvg} alt="Car background" />
         
-        <img className="w-[960px] h-[1228px] left-[789px] top-[-436px] absolute rounded-3xl" src={CarImageSvg} alt="Car background" />
-        
-        <div className="left-[72px] top-[121px] absolute justify-start">
+        <div className="left-[40px] top-[121px] absolute justify-start">
           <span className="text-Color-Dark-Primary text-8xl font-normal font-['Fieldstones'] uppercase">Awesome, Last</span>
           <span className="text-Color-Light-Primary text-8xl font-normal font-['Fieldstones'] uppercase"> few q</span>
           <span className="text-white text-8xl font-normal font-['Fieldstones'] uppercase">uestions</span>
         </div>
         
         {/* Budget Section */}
-        <div className="w-[624px] h-40 left-[72px] top-[251px] absolute bg-green-900"></div>
-        <div className="p-4 left-[628px] top-[251px] absolute bg-green-900 rounded-[60px] inline-flex justify-start items-center gap-2.5">
-          <img src={BudgetIconSvg} alt="Budget icon" className="w-8 h-8" />
+        <div className="w-[624px] h-40 left-[72px] top-[251px] absolute">
+          <img src={RectangleSvg} alt="Budget background" className="w-full h-full" />
+        </div>
+        <div className="left-[628px] top-[251px] absolute inline-flex justify-start items-center gap-2.5">
+          <img src={BudgetIconSvg} alt="Budget icon" className="w-16 h-16" />
         </div>
         <div className="left-[102px] top-[275px] absolute justify-start text-white text-2xl font-medium font-['Fieldstones'] uppercase">What is your Budget?</div>
         
@@ -548,24 +596,26 @@ function Home_3() {
         <div className="w-32 h-5 left-[432px] top-[335px] absolute text-center justify-start text-white text-xl font-normal font-['Fieldstones'] capitalize">35,000$</div>
         
         <div className="left-[1249px] top-[330px] absolute text-right justify-start text-Color-Light-Primary text-3xl font-normal font-['Fieldstones'] uppercase">helpful tips</div>
-        <div className="w-5 h-10 left-[1518px] top-[332px] absolute bg-green-100"></div>
-        <div className="w-5 h-10 left-[1502px] top-[332px] absolute bg-green-300"></div>
-        <div className="w-5 h-10 left-[1486px] top-[332px] absolute bg-green-900 border border-Color-Light-Primary"></div>
+        <div className="left-[1486px] top-[325px] absolute">
+          <img src={TipsIconSvg} alt="Tips icon" className="w-12 h-12" />
+        </div>
         
-        <div className="w-36 h-10 px-7 py-3.5 left-[1249px] top-[403px] absolute bg-Color-Light-Primary rounded-[33px] inline-flex justify-center items-center gap-2.5">
-          <div className="justify-start text-green-900 text-sm font-normal font-['Fieldstones'] uppercase">Set a Budget</div>
+        <div className="w-36 h-10 px-4 py-3.5 left-[1249px] top-[403px] absolute bg-Color-Light-Primary rounded-[33px] inline-flex justify-center items-center gap-2.5">
+          <div className="text-green-900 text-xs font-normal font-['Fieldstones'] uppercase whitespace-nowrap">Set a Budget</div>
         </div>
-        <div className="w-32 h-10 px-7 py-3.5 left-[1403px] top-[403px] absolute rounded-[33px] outline outline-1 outline-offset-[-1px] outline-white inline-flex justify-center items-center gap-2.5">
-          <div className="justify-start text-white text-xs font-normal font-['Fieldstones'] uppercase">Get History Report</div>
+        <div className="w-36 h-10 px-4 py-3.5 left-[1405px] top-[403px] absolute rounded-[33px] outline outline-1 outline-offset-[-1px] outline-white inline-flex justify-center items-center gap-2.5">
+          <div className="text-white text-xs font-normal font-['Fieldstones'] uppercase whitespace-nowrap">Get History Report</div>
         </div>
-        <div className="w-32 h-10 px-7 py-3.5 left-[1552px] top-[403px] absolute rounded-[33px] outline outline-1 outline-offset-[-1px] outline-white inline-flex justify-center items-center gap-2.5">
-          <div className="justify-start text-white text-xs font-normal font-['Fieldstones'] uppercase">inspection DETAILS</div>
+        <div className="w-36 h-10 px-4 py-3.5 left-[1561px] top-[403px] absolute rounded-[33px] outline outline-1 outline-offset-[-1px] outline-white inline-flex justify-center items-center gap-2.5">
+          <div className="text-white text-xs font-normal font-['Fieldstones'] uppercase whitespace-nowrap">Inspection Details</div>
         </div>
         
         {/* Distance Section */}
-        <div className="w-[624px] h-40 left-[72px] top-[445px] absolute bg-green-900"></div>
-        <div className="w-16 h-16 px-5 py-4 left-[627px] top-[445px] absolute bg-green-900 rounded-[33.50px] inline-flex justify-start items-center gap-2.5">
-          <img src={LocationIconSvg} alt="Location icon" className="w-6 h-8" />
+        <div className="w-[624px] h-40 left-[72px] top-[445px] absolute">
+          <img src={RectangleSvg} alt="Distance background" className="w-full h-full" />
+        </div>
+        <div className="left-[627px] top-[445px] absolute inline-flex justify-start items-center gap-2.5">
+          <img src={LocationIconSvg} alt="Location icon" className="w-16 h-16" />
         </div>
         <div className="w-96 left-[102px] top-[474px] absolute justify-start text-white text-xl font-normal font-['Fieldstones'] uppercase">How far will you go for it?</div>
         <div className="w-96 h-32 left-[1246px] top-[495px] absolute justify-start text-Color-Light-Primary text-sm font-normal font-['Fieldstones']">Determine Your Price Range: Include not just the purchase price, but also taxes, registration, insurance, and potential repairs. <br/>Consider Financing: If you're taking out a loan, get pre-approved to know how much you can afford and what your interest rate will be.</div>
@@ -576,15 +626,30 @@ function Home_3() {
         <div className="w-28 left-[443.02px] top-[533px] absolute text-center justify-start text-green-300 text-sm font-normal font-['Fieldstones'] capitalize">Zip Code</div>
         
         {/* Travel Section */}
-        <div className="w-[624px] h-40 left-[72px] top-[642px] absolute bg-green-900"></div>
-        <div className="w-16 h-16 p-4 left-[627px] top-[642px] absolute bg-green-900 rounded-[33.50px] inline-flex justify-start items-center gap-2.5">
-          <img src={DistanceIconPng} alt="Distance icon" className="w-3 h-3.5" />
+        <div className="w-[624px] h-40 left-[72px] top-[642px] absolute">
+          <img src={RectangleSvg} alt="Travel background" className="w-full h-full" />
+        </div>
+        <div className="left-[627px] top-[642px] absolute inline-flex justify-start items-center gap-2.5">
+          <img src={DistanceIconPng} alt="Distance icon" className="w-16 h-16" />
         </div>
         <div className="w-64 left-[102px] top-[667px] absolute justify-start text-white text-xl font-normal font-['Fieldstones'] uppercase">How much do you travel per day?</div>
         <div className="left-[540px] top-[739px] absolute text-center justify-start text-white text-xl font-normal font-['Fieldstones'] capitalize">20 Miles</div>
-        <div className="w-2.5 h-2.5 left-[274px] top-[748px] absolute bg-green-300 rounded-full"></div>
+        <div 
+          className="w-2.5 h-2.5 absolute bg-green-300 rounded-full cursor-grab active:cursor-grabbing z-10"
+          style={{ 
+            left: `${travelPosition}px`,
+            top: '748px'
+          }}
+          onMouseDown={handleTravelMouseDown}
+          onTouchStart={handleTravelTouchStart}
+        />
         <div className="w-96 h-[5px] left-[102px] top-[751px] absolute bg-zinc-300 rounded-[47px]"></div>
-        <div className="w-44 h-[5px] left-[102px] top-[751px] absolute bg-Color-Light-Green rounded-[47px]"></div>
+        <div 
+          className="h-[5px] left-[102px] top-[751px] absolute bg-green-300 rounded-[47px]"
+          style={{ 
+            width: `${Math.max(0, travelPosition - 102)}px`
+          }}
+        />
       </div>
     </div>
   );
